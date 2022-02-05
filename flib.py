@@ -1,6 +1,9 @@
+from chromosome import Chromosome
+
+
 class Flib:
-    def __init__(self, chromosome):
-        self.chromosome = chromosome
+    def __init__(self, chromosome_string):
+        self.chromosome = Chromosome(chromosome_string)
 
     def evaluate(self, input_string):
         output_val = None

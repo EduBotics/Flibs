@@ -1,11 +1,10 @@
-from chromosome import Chromosome
 from flib import Flib
 import pytest
 
 
 @pytest.fixture
 def setup():
-    return Chromosome("111202011000")
+    return "111202011000"
 
 
 @pytest.mark.parametrize(

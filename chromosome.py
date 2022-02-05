@@ -1,4 +1,4 @@
-from random import randint
+from random import choice, randint
 
 
 class Chromosome:
@@ -26,10 +26,10 @@ class Chromosome:
 
     def mutate(self):
         loc = randint(self.chromosome_length)
+        current = self.chromosome.chromosome[loc]
         if loc % 2:
             # Odd loc is an output allele
-            current = self.chromosome.chromosome[loc]
             self.chromosome[loc] = ~current & 1  # Bit flip
         else:
             # Even loc is a state allele
-            self.chromosome[loc] = randint(self.chromosome_length)
+            self.chromosome[loc] = choice([val for val in range(self.states) if val != current])
