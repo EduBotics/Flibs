@@ -1,4 +1,4 @@
-from random import choice, randint
+from random import choice, randrange
 
 
 class Chromosome:
@@ -7,6 +7,15 @@ class Chromosome:
         self.chromosome_length = len(self.chromosome)
         self.states = int(len(chromosome) / 4)
         self.current_state = "0"
+
+    def __str__(self):
+        return "".join(self.chromosome)
+
+    def __repr__(self):
+        return f"Chromosome({str(self)})"
+
+    def as_string(self):
+        return str(self)
 
     def get_output(self, input_val):
         return self.get_table_entry(input_val)[0]
@@ -25,11 +34,11 @@ class Chromosome:
         return output
 
     def mutate(self):
-        loc = randint(self.chromosome_length)
-        current = self.chromosome.chromosome[loc]
+        loc = randrange(0, self.chromosome_length)
+        current = self.chromosome[loc]
         if loc % 2:
             # Odd loc is an output allele
-            self.chromosome[loc] = ~current & 1  # Bit flip
+            self.chromosome[loc] = str(~current & 1)  # Bit flip
         else:
             # Even loc is a state allele
-            self.chromosome[loc] = choice([val for val in range(self.states) if val != current])
+            self.chromosome[loc] = choice([str(val) for val in range(self.states) if val != current])
