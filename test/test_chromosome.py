@@ -24,7 +24,13 @@ def test_table_entry(setup):
     c, expected_table_entries = setup
     for expected_table_entry in expected_table_entries:
         c.current_state = expected_table_entry.state
-        assert c.get_table_entry(expected_table_entry.input) == expected_table_entry.entry
+        assert all(
+            table_item == expected_item
+            for table_item, expected_item in zip(
+                c.get_table_entry(expected_table_entry.input),
+                expected_table_entry.entry,
+            )
+        )
 
 
 def test_output_entry(setup):
@@ -38,7 +44,9 @@ def test_next_state(setup):
     c, expected_table_entries = setup
     for expected_table_entry in expected_table_entries:
         c.current_state = expected_table_entry.state
-        assert c.get_nextstate(expected_table_entry.input) == expected_table_entry.entry[1]
+        assert (
+            c.get_nextstate(expected_table_entry.input) == expected_table_entry.entry[1]
+        )
 
 
 def test_state_transition(setup):
