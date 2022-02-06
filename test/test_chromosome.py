@@ -56,6 +56,5 @@ def test_state_transition(setup):
     for input_val, table_idx in sequence:
         output = c.transition(input_val)
         expected_table_entry = expected_table_entries[table_idx]
-        print(f"{expected_table_entry = }")
         assert c.current_state == expected_table_entry.entry[1]
         assert output == expected_table_entry.entry[0]

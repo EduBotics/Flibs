@@ -4,9 +4,15 @@ from random import choice, randrange
 class Chromosome:
     def __init__(self, chromosome):
         self.chromosome = list(chromosome)
-        self.chromosome_length = len(self.chromosome)
-        self.states = int(len(chromosome) / 4)
         self.current_state = "0"
+
+    @property
+    def chromosome_length(self):
+        return len(self.chromosome)
+
+    @property
+    def states(self):
+        return int(len(self.chromosome) / 4)
 
     def __str__(self):
         return "".join(self.chromosome)
@@ -38,7 +44,9 @@ class Chromosome:
         current = self.chromosome[loc]
         if loc % 2:
             # Odd loc is an output allele
-            self.chromosome[loc] = str(~current & 1)  # Bit flip
+            self.chromosome[loc] = choice(
+                [str(val) for val in range(self.states) if str(val) != current]
+            )
         else:
             # Even loc is a state allele
-            self.chromosome[loc] = choice([str(val) for val in range(self.states) if val != current])
+            self.chromosome[loc] = str(~int(current) & 1)  # Bit flip
