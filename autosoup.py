@@ -47,5 +47,5 @@ if evaluation[0].score == len(INPUT_ENVIRONMENT):
     print(f"Perfect score from Flib {evaluation[0].flib} scoring {evaluation[0].score}")
     exit(0)
 
-if random > 0.2:
+if random() > 0.2:
     breed(evaluation, primordial_soup)
